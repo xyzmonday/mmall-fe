@@ -42,17 +42,16 @@ var page = {
         $('#submit-username').click(function(){
             var username = $.trim($('#username').val());
             // 用户名存在
-            if(username){
+            if(username) {
                 _user.getQuestion(username, function(res){
                     _this.data.username = username;
-                    _this.data.question = res;
+                    _this.data.question   = res;
                     _this.loadStepQuestion();
                 }, function(errMsg){
                     formError.show(errMsg);
                 });
-            }
-            // 用户名不存在
-            else{
+            }  else {
+                    // 用户名不存在
                 formError.show('请输入用户名');
             }
         });
@@ -63,19 +62,18 @@ var page = {
             if(answer){
                 // 检查密码提示问题答案
                 _user.checkAnswer({
-                    username : _this.data.username,
-                    question : _this.data.question,
-                    answer   : answer
+                    username  :  _this.data.username,
+                    question    :  _this.data.question,
+                    answer      :  answer
                 }, function(res){
                     _this.data.answer   = answer;
-                    _this.data.token    = res;
+                    _this.data.token     = res;
                     _this.loadStepPassword();
                 }, function(errMsg){
                     formError.show(errMsg);
                 });
-            }
-            // 用户名不存在
-            else{
+            } else {
+                //取回密码提示问题不存在
                 formError.show('请输入密码提示问题答案');
             }
         });
@@ -86,9 +84,9 @@ var page = {
             if(password && password.length >= 6){
                 // 检查密码提示问题答案
                 _user.resetPassword({
-                    username        : _this.data.username,
-                    passwordNew     : password,
-                    forgetToken     : _this.data.token
+                    username             :     _this.data.username,
+                    passwordNew     :    password,
+                    forgetToken       :    _this.data.token
                 }, function(res){
                     window.location.href = './result.html?type=pass-reset';
                 }, function(errMsg){

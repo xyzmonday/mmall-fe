@@ -77,7 +77,7 @@ var _user = {
     // 重置密码
     resetPassword: function(userInfo, resolve, reject) {
         _mm.request({
-            url: _mm.getServerUrl('/user/forgetRestPassword'),
+            url: _mm.getServerUrl('/user/forgetResetPassword'),
             data: userInfo,
             method: 'POST',
             success: resolve,

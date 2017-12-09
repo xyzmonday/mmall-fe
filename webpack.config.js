@@ -6,37 +6,44 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 /*var devServer = require('webpack-dev-server');*/
 //环境变量，dev／online
+//在windows的环境 dev-win/online
 var WEBPACK_ENV = process.env.WEBPACK_ENV || 'dev';
-
+console.log("WEBPACK_ENV = " + WEBPACK_ENV);
+console.log("'dev' == WEBPACK_ENV  = " + ('dev' == WEBPACK_ENV .toString()));
+console.log('dev' === WEBPACK_ENV );
 //获取Html模板配置
 var getHtmlConfig = function(name, title) {
     return {
-        template: './src/view/' + name + '.html',
-        filename: 'view/' + name + '.html',
-        favicon: './favicon.ico',
-        title: title,
-        inject: true,
-        hash: true,
-        chunks: ['common', name]
+        template      :  './src/view/' + name + '.html',
+        filename       :  'view/' + name + '.html',
+        favicon         :   './favicon.ico',
+        title              :  title,
+        inject           :  true,
+        hash             :  true,
+        chunks         :  ['common', name]
     }
 }
 
 
 var config = {
     entry: {
-        'common': ['./src/page/common/index.js'],
-        'index': ['./src/page/index/index.js'],
-        'user-login': ['./src/page/user-login/index.js'],
-        'user-register': ['./src/page/user-register/index.js'],
-        'user-pass-reset': ['./src/page/user-pass-reset/index.js'],
-        'result': ['./src/page/result/index.js']
+        'common'                                   :      ['./src/page/common/index.js'],
+        'index'                                        :     ['./src/page/index/index.js'],
+        'user-login'                                :     ['./src/page/user-login/index.js'],
+        'user-register'                         :     ['./src/page/user-register/index.js'],
+        'user-pass-reset'                    :     ['./src/page/user-pass-reset/index.js'],
+         'user-pass-update'                 :     ['./src/page/user-pass-update/index.js'],
+        'user-center'                            :     ['./src/page/user-center/index.js'],
+         'user-center-update'             :     ['./src/page/user-center-update/index.js'],
+        'result'                                       :     ['./src/page/result/index.js']
     },
     output: {
         //打包后保存的路径
-        path: __dirname + '/dist/',
+        path              :  __dirname + '/dist/',
         //访问文件的根路径
-        publicPath: 'dev' === WEBPACK_ENV ? '/dist/' : '//s.happymall.shop/mmall-fe/dist/',
-        filename: 'js/[name].js',
+       // publicPath: 'dev' === WEBPACK_ENV ? '/dist/' : '//s.happymall.shop/mmall-fe/dist/',
+        publicPath   :  '/dist/',
+        filename       :  'js/[name].js',
     },
     externals: {
         //  'jquery': 'window.jQuery',
@@ -98,7 +105,11 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('user-login', '用户登陆')),
         new HtmlWebpackPlugin(getHtmlConfig('user-register', '用户注册')),
         new HtmlWebpackPlugin(getHtmlConfig('user-pass-reset', '重置密码')),
+           new HtmlWebpackPlugin(getHtmlConfig('user-pass-update', '修改密码')),
+        new HtmlWebpackPlugin(getHtmlConfig('user-center', '个人中心')),
+        new HtmlWebpackPlugin(getHtmlConfig('user-center-update', '修改个人信息')),
         new HtmlWebpackPlugin(getHtmlConfig('result', '操作结果')),
+
     ],
     /* devServer: {
          //配置webpack-dev-server
@@ -108,6 +119,7 @@ var config = {
          port: 9000
      }*/
 };
+
 if ('dev' === WEBPACK_ENV) {
     config.entry.common.push('webpack-dev-server/client?http://localhost:8088/');
 }

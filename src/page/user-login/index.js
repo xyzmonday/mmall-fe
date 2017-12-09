@@ -38,6 +38,7 @@ var page = {
             password: $.trim($('#password').val())
         };
         var validateResult = this.formValidate(formData);
+        console.log("validateResult = " + validateResult.status);
         if (validateResult.status) {
             //验证成功，提交
             _user.login(formData, function(result) {
