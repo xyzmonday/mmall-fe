@@ -4,10 +4,10 @@
 require('./index.css');
 require('page/common/nav/index.js');
 require('page/common/header/index.js');
-var navSide = require('page/common/nav-side/index.js');
-var _mm = require('util/mm.js');
-var _user = require('service/user-service.js');
-var templateIndex = require('./index.string');
+var navSide              = require('page/common/nav-side/index.js');
+var _mm                    = require('util/mm.js');
+var _user                  = require('service/user-service.js');
+var templateIndex  = require('./index.string');
 /*表单里面的错误提示*/
 var formError = {
     show: function(errorMsg) {

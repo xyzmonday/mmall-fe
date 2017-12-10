@@ -6,6 +6,7 @@ var _mm = require('util/mm.js');
 var header = {
     init: function() {
         this.bindEvent();
+        this.onLoad();
         return this;
     },
     //使用请求填充搜索输入框
@@ -24,7 +25,6 @@ var header = {
 
         // 输入会车后，做搜索提交
         $('#search-input').keyup(function(e) {
-            alert("kecode = " + e.keyCode);
             // 13是回车键的keyCode
             if (e.keyCode === 13) {
                 _this.searchSubmit();

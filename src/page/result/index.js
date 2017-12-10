@@ -1,13 +1,14 @@
 'use strict';
 require('./index.css');
 require('page/common/nav-simple/index.js');
-var navSide = require('page/common/nav-side/index.js');
 var _mm = require('util/mm.js');
 
-//页面加载完毕
-$(function() {
-    var type = _mm.getUrlParam('type');
-    var $element = $('.' + type + '-success');
-    $element.show();
-
+$(function(){
+	var type = _mm.getUrlParam('type') || 'default',
+	$element = $('.' + type + '-success').show();
+	
+	if(type === 'payment'){
+		var $orderNumber = $element.find('.order-number');
+		$orderNumber.attr('href' , $orderNumber.attr('href')+_mm.getUrlParam('orderNumber'));
+	}
 });
